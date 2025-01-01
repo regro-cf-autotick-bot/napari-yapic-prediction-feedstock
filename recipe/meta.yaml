@@ -6,24 +6,24 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/napari-yapic-prediction-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/napari-yapic-prediction-{{ version }}.tar.gz
   sha256: 02ef748c83984ffde15d006a9847f528686b5fd50cdb3e7761e7a9fb892004ab
 
 build:
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
-  number: 0
+  number: 1
 
 requirements:
   host:
     - pip
-    - python >=3.6
+    - python {{ python_min }}
     - setuptools-scm
   run:
     - napari
     - napari-plugin-engine >=0.1.4
     - numpy
-    - python >=3.6
+    - python >={{ python_min }}
     - scikit-image
     - yapic
 
@@ -35,6 +35,7 @@ test:
     - pip check
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://github.com/yapic/napari-yapic-prediction
